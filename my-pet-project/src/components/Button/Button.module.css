@@ -1,0 +1,25 @@
+.button {
+    background-color: var(--bg-button);
+    padding: 16px 0;
+    width: 100%;
+    height: 56px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    color: var(--text-color-white);
+    margin-bottom: 32px;
+    display: block;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    transition: .5s;
+    margin-top: 40px;
+}
+
+.button:hover {
+    background-color: var(--bg-button-hover);
+}
+
+.button:active {
+    background-color: var(--bg-button-active);
+}

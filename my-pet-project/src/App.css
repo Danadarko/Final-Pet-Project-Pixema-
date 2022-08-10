@@ -1,0 +1,10 @@
+.App {
+    --background-color-black: #242426;
+    --text-color-white: #fff;
+    --bg-input: #323537;
+    --text-color-white-grey: #80858B;
+    --bg-button: #7B61FF;
+    --text-color-lilac: #7B61FF;
+    --bg-button-hover: #a492ff;
+    --bg-button-active: #6a4dff;
+}
