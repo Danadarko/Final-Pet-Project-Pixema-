@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Button from "../../components/Button/Button";
-import Input from "../../components/Inputs/Input/Input";
+import Button from "../Button/Button";
+import Input from "../Inputs/Input/Input";
 
-import styles from "./SignUp.module.css";
+import styles from "./SignUpForm.module.css";
 
 export type LoginForm = {
   email: string;
@@ -10,11 +10,11 @@ export type LoginForm = {
   name: string;
 };
 
-type SignUp = {
+type SignUpFormProps = {
   onRegistration?: (form: LoginForm) => void;
 };
 
-const SignUp: React.FC<SignUp> = ({ onRegistration }) => {
+const SignUpForm: React.FC<SignUpFormProps> = ({ onRegistration }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -66,4 +66,4 @@ const SignUp: React.FC<SignUp> = ({ onRegistration }) => {
   );
 };
 
-export default SignUp;
+export default SignUpForm;

@@ -17,6 +17,14 @@
     padding: 174px 63px;
 }
 
+.wrapperResetPassword {
+    padding: 370px 0 64px;
+}
+
+.wrapperNewPassword {
+    padding: 314px 0 64px;
+}
+
 .wrapper::before {
     content: '';
     width: 100%;

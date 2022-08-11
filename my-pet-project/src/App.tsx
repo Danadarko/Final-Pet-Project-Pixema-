@@ -1,13 +1,12 @@
 import React from "react";
 import "./App.css";
-import SignInPage from "./containers/SignInPage/SignInPage";
-import SignUpPage from "./containers/SignUpPage/SignUpPage";
+import NewPasswordPage from "./containers/NewPasswordPage/NewPasswordPage";
+import ResetPasswordPage from "./containers/ResetPasswordPage/ResetPasswordPage";
 
 function App() {
   return (
     <div className="App">
-      <SignUpPage></SignUpPage>
-      <SignInPage></SignInPage>
+      <NewPasswordPage></NewPasswordPage>
     </div>
   );
 }

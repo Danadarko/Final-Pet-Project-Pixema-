@@ -1,5 +1,5 @@
 import React from "react";
-import SignUp from "../../components/SignUp/SignUp";
+import SignUp from "../../components/SignUpForm/SignUpForm";
 import OnboardingTemplate from "../../components/Templates/OnboardingTemplate/OnboardingTemplate";
 import styles from "../../components/Templates/OnboardingTemplate/OnboardingTemplate.module.css";
 

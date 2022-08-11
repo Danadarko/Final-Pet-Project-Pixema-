@@ -7,6 +7,7 @@ type ButtonProps = {
   role?: string;
   className?: string;
   id?: string;
+  disabled?: boolean | undefined;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -16,6 +17,7 @@ const Button: React.FC<ButtonProps> = ({
   role,
   className = "",
   id,
+  disabled,
 }) => {
   return (
     <button
@@ -24,6 +26,7 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       role={role}
       id={id}
+      disabled={disabled}
     >
       {children}
     </button>

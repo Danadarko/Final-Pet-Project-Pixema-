@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Button from "../../components/Button/Button";
-import Input from "../../components/Inputs/Input/Input";
+import Button from "../Button/Button";
+import Input from "../Inputs/Input/Input";
 
 import styles from "./SignInForm.module.css";
 
