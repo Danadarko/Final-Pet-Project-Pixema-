@@ -1,12 +1,18 @@
 import React from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
-import NewPasswordPage from "./containers/NewPasswordPage/NewPasswordPage";
-import ResetPasswordPage from "./containers/ResetPasswordPage/ResetPasswordPage";
+import MainPage from "./containers/MainPage/MainPage";
+
+import { AppPages } from "./types";
 
 function App() {
+  const navigate = useNavigate();
+  const appRef = React.createRef<HTMLDivElement>();
   return (
     <div className="App">
-      <NewPasswordPage></NewPasswordPage>
+      <Routes>
+        <Route path={AppPages.All_FILMS} element={<MainPage />}></Route>
+      </Routes>
     </div>
   );
 }

@@ -1,7 +1,8 @@
 import React from "react";
-import styles from "./OnboardingTemplate.module.css";
-import { ReactComponent as LogoIcon } from "../../../assets/pixema.svg";
-import Footer from "../../Footer/Footer";
+import styles from "./Template.module.css";
+
+import Header from "../../Header/Header";
+import Sidebar from "../../SideBar/SideBar";
 
 type TemplateProps = {
   children: React.ReactNode;
@@ -11,9 +12,10 @@ type TemplateProps = {
 const Template: React.FC<TemplateProps> = ({ children, className }) => {
   return (
     <div className={`${styles.wrapper} ${className}`}>
-      <LogoIcon className={styles.svg}></LogoIcon>
+      <Header></Header>
+
+      <Sidebar />
       {children}
-      <Footer />
     </div>
   );
 };

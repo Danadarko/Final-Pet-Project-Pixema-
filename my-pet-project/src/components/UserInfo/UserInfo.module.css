@@ -1,0 +1,29 @@
+.userInfo {
+    display: flex;
+    align-items: center;
+    width: calc(100% - 158px - 146px - 1184px - 41px);
+}
+
+.image {
+    width: 56px;
+    height: 56px;
+    padding: 16px;
+    background-color: var(--bg-button);
+    border-radius: 10px;
+    margin-right: 20px;
+    color: var(--text-color-white);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.text {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--text-color-white);
+}
+
+.svg {
+    margin-left: auto;
+}

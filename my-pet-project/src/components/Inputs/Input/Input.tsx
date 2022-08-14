@@ -4,13 +4,14 @@ import styles from "./Input.module.css";
 type InputProps = {
   type: "text" | "email" | "password" | "file";
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  title: string;
+  title?: string;
   value?: string;
   placeholder: string;
+  className?: string;
 };
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ type, onChange, title, value, placeholder }, ref) => {
+  ({ type, onChange, title, value, placeholder, className, }, ref) => {
     return (
       <label className={styles.label}>
         {title}
@@ -20,7 +21,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           type={type}
           onChange={onChange}
           value={value}
-          className={styles.input}
+          className={`${styles.input} ${className}`}
           placeholder={placeholder}
         />
       </label>

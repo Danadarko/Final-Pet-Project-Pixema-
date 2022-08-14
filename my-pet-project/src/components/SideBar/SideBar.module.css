@@ -1,0 +1,42 @@
+.sidebarContainer {
+    position: fixed;
+    padding-left: 64px;
+    display: flex;
+    flex-flow: column;
+    max-width: 304px;
+    width: 100%;
+    height: 86%;
+}
+
+.list {
+    display: flex;
+    flex-flow: column;
+    align-items: start;
+}
+
+.list .footer {
+    text-align: start;
+}
+
+.text {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    list-style-type: none;
+    text-decoration: none;
+    color: var(--text-color-white-grey);
+}
+
+.item {
+    margin-bottom: 40px;
+    display: flex;
+    place-items: center;
+}
+
+.item:last-child {
+    margin-bottom: 0;
+}
+
+.svg {
+    margin-right: 25px;
+}

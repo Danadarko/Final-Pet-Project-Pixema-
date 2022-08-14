@@ -7,6 +7,11 @@
 }
 
 .footer {
+    margin-top: auto;
     margin-bottom: 64px;
     z-index: 1;
+}
+
+.footerMain {
+    text-align: start;
 }

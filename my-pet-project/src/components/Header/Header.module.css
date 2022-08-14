@@ -1,0 +1,13 @@
+.svg {
+    margin-right: 146px;
+}
+
+.header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 40px 70px 0 64px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}

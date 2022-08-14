@@ -1,8 +1,19 @@
-.App {
+* {
     font-family: 'Exo 2';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.App {
     --background-color-black: #242426;
+    --main-bg-color: #000;
     --text-color-white: #fff;
+    --bg-green: #00A340;
+    --bg-yellow: #F3A608;
+    --bg-orange: #F45D2D;
     --bg-input: #323537;
+    --text-color-grey: #AFB2B6;
     --text-color-white-grey: #80858B;
     --bg-button: #7B61FF;
     --text-color-lilac: #7B61FF;

@@ -1,12 +1,14 @@
 import React from "react";
 import styles from "./Footer.module.css";
 
-type FooterProps = {};
+type FooterProps = {
+  className?: string;
+};
 
-const Footer: React.FC<FooterProps> = () => {
+const Footer: React.FC<FooterProps> = ({ className }) => {
   return (
     <footer className={styles.footer}>
-      <p className={styles.text}>© All Rights Reserved</p>
+      <p className={`${styles.text} ${className}`}>© All Rights Reserved</p>
     </footer>
   );
 };

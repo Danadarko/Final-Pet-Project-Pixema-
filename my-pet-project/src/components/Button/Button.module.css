@@ -28,3 +28,58 @@
 .button:active {
     background-color: var(--bg-button-active);
 }
+
+.filterBtn {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 14px 0;
+    text-align: center;
+    background-color: var(--bg-input);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    margin: 0;
+}
+
+.filterBtn:last-child {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.filterBtnActive {
+    background-color: var(--background-color-black);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 14px 0;
+    text-align: center;
+}
+
+.btnSubmit {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 14px 0;
+    text-align: center;
+    background-color: var(--bg-input);
+    margin: 0;
+}
+
+.btnShow {
+    padding: 8px 24px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--text-color-white);
+    background-color: var(--bg-input);
+    border-radius: 40px;
+    max-width: 161px;
+    width: 100%;
+    margin: 0 auto;
+    height: 40px;
+    border: none;
+}
