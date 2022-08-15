@@ -2,6 +2,13 @@
     padding: 0 62px 64px 368px;
 }
 
+.recommendationsContainer {
+    padding: 0;
+    width: 100%;
+    max-height: 433px;
+    overflow: hidden;
+}
+
 .list {
     margin-bottom: 64px;
     max-height: 760px;
@@ -10,4 +17,21 @@
     grid-template-columns: repeat(5, 1fr);
     grid-column-gap: 40px;
     grid-row-gap: 40px;
+}
+
+.listRecommendations {
+    margin-bottom: 64px;
+    max-height: 760px;
+    overflow-x: scroll;
+    display: flex;
+    grid-column-gap: 40px;
+    scroll-snap-type: x mandatory;
+}
+
+.listRecommendations>* {
+    scroll-snap-align: start;
+}
+
+.list::-webkit-scrollbar {
+    display: none;
 }

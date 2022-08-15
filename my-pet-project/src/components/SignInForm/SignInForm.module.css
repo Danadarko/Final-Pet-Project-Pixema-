@@ -37,6 +37,7 @@
     text-align: center;
 }
 
-span {
+.link {
     color: var(--text-color-lilac);
+    text-decoration: none;
 }

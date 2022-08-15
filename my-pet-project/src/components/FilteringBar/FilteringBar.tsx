@@ -9,17 +9,23 @@ import Input from "../Inputs/Input/Input";
 import { ReactComponent as ChevronIcon } from "../../assets/chevron-interface.svg";
 import { ReactComponent as Line } from "../../assets/line.svg";
 
-type FilteringBarProps = {};
+type FilteringBarProps = {
+  clasName?: string;
+  onCancelClick: () => void;
+};
 
-const FilteringBar: React.FC<FilteringBarProps> = () => {
+const FilteringBar: React.FC<FilteringBarProps> = ({
+  clasName,
+  onCancelClick,
+}) => {
   const [inputText, setInputText] = useState("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   return (
-    <div className={styles.container}>
+    <div className={`${clasName} ${styles.container}`}>
       <div className={styles.titleGroup}>
         <h2 className={styles.title}>Filters</h2>
-        <CancelIcon />
+        <CancelIcon onClick={onCancelClick} className={styles.svg} />
       </div>
       <div className={styles.content}>
         <FilteringSection title="Sort by">

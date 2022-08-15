@@ -83,3 +83,62 @@
     height: 40px;
     border: none;
 }
+
+.btnFeatures {
+    background-color: var(--bg-input);
+    padding: 19 0;
+    height: 56px;
+    margin-right: 1px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    margin: 0 1px 0 0;
+}
+
+.btnFeatures:last-child {
+    background-color: var(--bg-input);
+    padding: 19 0;
+    height: 56px;
+    margin-right: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.btnFeatures:hover {
+    background-color: var(--bg-input);
+}
+
+.btnFeatures:active {
+    background-color: var(--bg-input);
+}
+
+.settingsBtn {
+    margin: 0;
+    background-color: var(--bg-input);
+}
+
+.settingsBtn:active {
+    background-color: var(--text-color-lilac);
+}
+
+.spinner {
+    margin: 0 auto;
+    width: 16px;
+    height: 16px;
+    border: 3px solid;
+    border-color: var(--bg-button) transparent var(--bg-button) transparent;
+    border-radius: 50%;
+    animation: spin-anim 1.2s linear infinite;
+}
+
+@keyframes spin-anim {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

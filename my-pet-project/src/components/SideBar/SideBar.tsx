@@ -7,40 +7,23 @@ import { ReactComponent as SettingsIcon } from "../../assets/settingsIcon.svg";
 import footerStyles from "../Footer/Footer.module.css";
 import styles from "./SideBar.module.css";
 import Footer from "../Footer/Footer";
+import TabList from "../TabsList/TabList";
+import { TabEnum } from "../../types";
+import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 
-type SidebarProps = {};
+type SidebarProps = {
+  tabs: TabEnum[];
+  activeTab?: TabEnum;
+  onTabClick: (selectedTab: TabEnum) => void;
+};
 
-const Sidebar: React.FC<SidebarProps> = () => {
+const Sidebar: React.FC<SidebarProps> = ({ tabs, activeTab, onTabClick }) => {
   return (
     <aside className={styles.sidebarContainer}>
       <nav>
-        <ul className={styles.list}>
-          <li className={styles.item}>
-            <HomeIcon className={styles.svg} />
-            <a href="/" className={styles.text}>
-              Home
-            </a>
-          </li>
-          <li className={styles.item}>
-            <TrendsIcon className={styles.svg} />
-            <a href="/" className={styles.text}>
-              Trends
-            </a>
-          </li>
-          <li className={styles.item}>
-            <FavoritesIcon className={styles.svg} />
-            <a href="/" className={styles.text}>
-              Favorites
-            </a>
-          </li>
-          <li className={styles.item}>
-            <SettingsIcon className={styles.svg} />
-            <a href="/" className={styles.text}>
-              Settings
-            </a>
-          </li>
-        </ul>
+        <TabList tabs={tabs} activeTab={activeTab} onTabClick={onTabClick} />
       </nav>
+
       <Footer className={footerStyles.footerMain} />
     </aside>
   );

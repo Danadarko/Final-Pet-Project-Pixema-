@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { AppPages } from "../../types";
 import Button from "../Button/Button";
 import Input from "../Inputs/Input/Input";
 
@@ -59,7 +61,10 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onRegistration }) => {
         />
         <Button type="submit">Sign up</Button>
         <p className={styles.text}>
-          Already have an account? <span>Sign In</span>
+          Already have an account?{" "}
+          <Link to={AppPages.LOGIN} className={styles.link}>
+            Sign in
+          </Link>
         </p>
       </fieldset>
     </form>

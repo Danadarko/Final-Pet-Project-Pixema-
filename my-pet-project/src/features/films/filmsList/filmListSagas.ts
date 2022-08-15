@@ -20,3 +20,24 @@ export function* filmListSaga() {
     }
   });
 }
+
+export function* trendedFilmListSaga() {
+  yield takeLatest(actions.getTrendedFilmsFetch, function* (action) {
+    try {
+      const result = yield* call(
+        FetchFilmsApi.fetchTrendedFilms,
+        action.payload
+      );
+      yield* put(
+        actions.getTrendedFilmsSuccess({
+          films: result,
+          ...action.payload,
+        })
+      );
+    } catch (e) {
+      if (e instanceof Error) {
+        yield* put(actions.getTrendedFilmsFailure(e.message));
+      }
+    }
+  });
+}

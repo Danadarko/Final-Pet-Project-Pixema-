@@ -1,0 +1,16 @@
+.wrapper {
+    width: 13.5px;
+}
+
+.icon {
+    cursor: pointer;
+    transition: .5s;
+}
+
+.icon path {
+    fill: var(--text-color-grey);
+}
+
+.iconMarked path {
+    fill: var(--bg-button);
+}

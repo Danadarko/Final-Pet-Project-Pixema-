@@ -9,6 +9,22 @@
     max-width: 518px;
     width: 100%;
     height: 100vh;
+    animation: fade-in 0.5s ease-in;
+    z-index: 2;
+}
+
+.containerHidden {
+    display: none;
+    animation: fade-in 0.5s ease-in;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0
+    }
+    100% {
+        opacity: 1
+    }
 }
 
 .titleGroup {
@@ -16,6 +32,15 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 48px;
+}
+
+.svg {
+    cursor: pointer;
+}
+
+.svg path:hover {
+    fill: var(--bg-button);
+    transition: .5s;
 }
 
 .sectionContainer {

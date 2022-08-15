@@ -1,65 +1,88 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Template from "../../components/Templates/Template/Template";
 import FilmCardList from "../../components/FilmCardList/FilmCardList";
 import { Film } from "../../types/film";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { actions } from "../../features/films/filmsList/filmListSlice";
+import SideBar from "../../components/SideBar/SideBar";
+import { TabEnum } from "../../types";
+import Settings from "../../components/Settings/Settings";
 
 type MainPageProps = {};
 
 const MainPage: React.FC<MainPageProps> = () => {
-  const filmsList = useAppSelector((state) => state.filmList.films);
-
-  const hasFetchedData = useRef(false);
-  const { count, isFetching } = useAppSelector((state) => state.filmList);
+  const favoriteFilms = useAppSelector((state) => state.markedFilm);
+  const filmsList = useAppSelector(
+    (state) => state.filmList.allFilmsList.films
+  );
+  const [activeTab, setActiveTab] = useState(TabEnum.HOME);
+  const { count, isFetching } = useAppSelector(
+    (state) => state.filmList.allFilmsList
+  );
+  const { trendedCount, trendedIsFetching } = useAppSelector(
+    (state) => state.filmList.trendedFilms
+  );
   const dispatch = useAppDispatch();
+  const trendedFilmList = useAppSelector(
+    (state) => state.filmList.trendedFilms.trendedFilms
+  );
+
   useEffect(() => {
-    /*async function fetchData() {
-      const response = await fetch(
-        "https://imdb-api.com/API/AdvancedSearch/k_3ws77ve9?title_type=feature&count=10"
-      );
-      const { results } = await response.json();
-      console.log(results);
-      setFilms(results);
-    }
-    if (hasFetchedData.current === false) {
-      fetchData();
-      hasFetchedData.current = true;
-    }*/
     if (!isFetching) {
       dispatch(
         actions.getFilmsFetch({
           count: count,
         })
       );
-
-      console.log("getPosts");
     }
   }, [dispatch, count]);
 
-  /*const scrollHandler = (e: any): void => {
-    if (
-      e.currentTarget.documentElement.scrollHeight -
-        (e.currentTarget.documentElement.scrollTop + window.innerHeight) <
-      60
-    ) {
-      dispatch(actions.fetchNextPage());
+  useEffect(() => {
+    if (!trendedIsFetching) {
+      dispatch(
+        actions.getTrendedFilmsFetch({
+          count: trendedCount,
+        })
+      );
+    }
+  }, [dispatch, trendedCount]);
+
+  const TABS_LIST = Object.values(TabEnum);
+  const filterFilmsByFavourite = (film: Film) => favoriteFilms[film.id];
+  const getActiveTabFilms = (
+    activeTab: TabEnum,
+    filmsList: Film[],
+    trendedFilmList: Film[]
+  ): Film[] | void => {
+    switch (activeTab) {
+      case TabEnum.HOME:
+        return filmsList;
+      case TabEnum.TRENDS:
+        return trendedFilmList;
+      case TabEnum.FAVORITES:
+        const filmList = [...filmsList, ...trendedFilmList];
+        return filmList.filter(filterFilmsByFavourite);
+      case TabEnum.SETTINGS:
+        return;
     }
   };
 
-  useEffect(() => {
-    document.addEventListener("scroll", scrollHandler);
-    return function () {
-      document.removeEventListener("scroll", scrollHandler);
-    };
-  });*/
-
   return (
     <Template>
-      <FilmCardList
-        filmCards={filmsList}
-        onButtonClick={() => dispatch(actions.fetchNextPage())}
-      ></FilmCardList>
+      <SideBar
+        tabs={TABS_LIST}
+        activeTab={activeTab}
+        onTabClick={setActiveTab}
+      ></SideBar>
+      {activeTab === TabEnum.SETTINGS ? (
+        <Settings />
+      ) : (
+        <FilmCardList
+          filmCards={getActiveTabFilms(activeTab, filmsList, trendedFilmList)}
+          onButtonClick={() => dispatch(actions.fetchTrendedNextPage())}
+          isLoadingSpinner={isFetching}
+        ></FilmCardList>
+      )}
     </Template>
   );
 };

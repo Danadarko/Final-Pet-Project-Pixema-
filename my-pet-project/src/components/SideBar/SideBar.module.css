@@ -27,16 +27,41 @@
     color: var(--text-color-white-grey);
 }
 
-.item {
+.tab {
     margin-bottom: 40px;
     display: flex;
     place-items: center;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    color: var(--text-color-white-grey);
+    border: none;
+    background-color: transparent;
+    transition: .5s;
+    cursor: pointer;
 }
 
-.item:last-child {
+.active {
+    transition: .5s;
+    margin-bottom: 40px;
+    display: flex;
+    place-items: center;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    color: var(--text-color-lilac);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.tab:last-child {
     margin-bottom: 0;
 }
 
 .svg {
     margin-right: 25px;
+    width: 19.6px;
+    height: 19.6px;
+    cursor: pointer;
 }

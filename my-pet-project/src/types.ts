@@ -4,13 +4,14 @@ export enum AppPages {
   LANDING = "/landing",
   All_FILMS = "/films",
   RESET_PASSWORD = "/reset-password",
-  SUCCESS_PAGE = "/success-page",
+  NEW_PASSWORD_PAGE = "/new-password-page",
   INFORMATION_PAGE = "/information-page",
   ACTIVATE = "/activate",
 }
 
 export enum TabEnum {
-  All = "All",
-  MyFavourites = "My favourites",
-  Popular = "Popular",
+  HOME = "Home",
+  TRENDS = "Trends",
+  FAVORITES = "Favorites",
+  SETTINGS = "Settings",
 }

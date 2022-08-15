@@ -26,4 +26,10 @@
 
 .svg {
     margin-left: auto;
+    cursor: pointer;
+}
+
+.svg path:hover {
+    fill: var(--bg-button);
+    transition: .5s;
 }

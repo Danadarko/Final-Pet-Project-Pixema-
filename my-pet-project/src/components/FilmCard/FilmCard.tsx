@@ -1,16 +1,23 @@
+import { Link } from "react-router-dom";
+import FilmsMarkedUnmarked from "../../features/films/markedFilms/posts-marked-unmarked";
+import { AppPages } from "../../types";
+import Button from "../Button/Button";
 import styles from "./FilmCard.module.css";
 
 type FilmCardProps = {
   id: string;
-  rank: string;
+  imDbRatingVotes: string;
   title: string;
   fullTitle: string;
   year: string;
   image: string;
   crew: string;
   imDbRating: string;
-  imDbRatingCount: string;
+  description: string;
   genres: string;
+  plot: string;
+  stars: string;
+  runtimeStr: string;
 };
 
 const FilmCard: React.FC<FilmCardProps> = ({
@@ -38,8 +45,11 @@ const FilmCard: React.FC<FilmCardProps> = ({
             {imDbRating}
           </p>
         )}
-        <img src={image} alt={title} className={styles.poster} />
+        <Link to={`${AppPages.All_FILMS}/${id}`} className={styles.link}>
+          <img src={image} alt={title} className={styles.poster} />
+        </Link>
       </div>
+
       <h3 className={styles.title}>{title}</h3>
       <ul className={styles.text}>
         {genresArray.map((genre, index) => (

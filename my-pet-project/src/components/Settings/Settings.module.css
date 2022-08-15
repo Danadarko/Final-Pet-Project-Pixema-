@@ -1,0 +1,74 @@
+.settingsContainer {
+    padding: 0 0 62px;
+    margin: 0 auto;
+    max-width: 1186px;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+    color: var(--text-color-white);
+    margin-bottom: 16px;
+}
+
+.section {
+    border: none;
+    margin-bottom: 40px;
+}
+
+.section:last-child {
+    margin-bottom: 0;
+}
+
+.inputGroup {
+    border-radius: 10px;
+    background-color: var(--background-color-black);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 40px;
+    grid-column-gap: 40px
+}
+
+.inputGroupLast {
+    padding: 24px 40px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    background-color: var(--background-color-black);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 40px
+}
+
+.inputGroup div {
+    display: grid;
+    grid-row-gap: 24px
+}
+
+.inputSettings {
+    margin-bottom: 0;
+}
+
+.textGroup p {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--text-color-white);
+}
+
+.textGroup p:last-child {
+    font-weight: 500;
+    color: var(--text-color-grey);
+}
+
+.switcher {
+    text-align: end;
+}
+
+.btnGroup {
+    margin-left: 50%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 40px
+}

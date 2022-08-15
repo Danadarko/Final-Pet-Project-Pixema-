@@ -8,14 +8,14 @@
 .imgContainer {
     position: relative;
     margin-bottom: 24px;
-    max-width: 266px;
-    max-height: 357px;
+    width: 266px;
+    height: 357px;
 }
 
 .imgContainer::before {
     content: '';
     display: block;
-    padding-top: 148%;
+    padding-top: 134%;
 }
 
 .poster {

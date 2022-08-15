@@ -4,36 +4,70 @@ import { Film } from "../../../types/film";
 const filmListSlice = createSlice({
   name: "filmList",
   initialState: {
-    films: [],
-    isFetching: false,
-    count: 10,
-    isLastPage: false,
+    allFilmsList: {
+      films: [],
+      isFetching: false,
+      count: 10,
+      isLastPage: false,
+    },
+    trendedFilms: {
+      trendedFilms: [],
+      trendedIsFetching: false,
+      trendedCount: 10,
+      isLastPage: false,
+    },
   } as {
-    films: Film[];
-    isFetching: boolean;
-    count: number;
-    isLastPage: boolean;
+    allFilmsList: {
+      films: Film[];
+      isFetching: boolean;
+      count: number;
+      isLastPage: boolean;
+    };
+    trendedFilms: {
+      trendedFilms: Film[];
+      trendedIsFetching: boolean;
+      trendedCount: number;
+      isLastPage: boolean;
+    };
   },
   reducers: {
     fetchNextPage: (state) => {
-      state.count = state.count + 10;
+      state.allFilmsList.count = state.allFilmsList.count + 10;
+    },
+    fetchTrendedNextPage: (state) => {
+      state.trendedFilms.trendedCount = state.trendedFilms.trendedCount + 10;
     },
     getFilmsFetch: (state, action: { payload: { count: number } }) => {
-      state.isFetching = true;
+      state.allFilmsList.isFetching = true;
+    },
+    getTrendedFilmsFetch: (state, action: { payload: { count: number } }) => {
+      state.trendedFilms.trendedIsFetching = true;
     },
     getFilmsSuccess: (
       state,
       action: { payload: { films: Film[]; count: number } }
     ) => {
       //state.films = action.payload.films;
-      state.films = [...action.payload.films];
-      state.isFetching = false;
+      state.allFilmsList.films = [...action.payload.films];
+      state.allFilmsList.isFetching = false;
+    },
+    getTrendedFilmsSuccess: (
+      state,
+      action: { payload: { films: Film[]; count: number } }
+    ) => {
+      //state.films = action.payload.films;
+      state.trendedFilms.trendedFilms = [...action.payload.films];
+      state.trendedFilms.trendedIsFetching = false;
     },
     getFilmsUpdate: (state, action: { payload: { isFetching: boolean } }) => {
-      state.isFetching = true;
+      state.allFilmsList.isFetching = true;
     },
     getFilmsFailure: (state, action: { payload: string }) => {
-      state.isFetching = false;
+      state.allFilmsList.isFetching = false;
+      console.error("Failed to receive the film list", action.payload);
+    },
+    getTrendedFilmsFailure: (state, action: { payload: string }) => {
+      state.trendedFilms.trendedIsFetching = false;
       console.error("Failed to receive the film list", action.payload);
     },
   },

@@ -8,6 +8,7 @@ type ButtonProps = {
   className?: string;
   id?: string;
   disabled?: boolean | undefined;
+  loadingSpinner?: boolean;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -18,6 +19,7 @@ const Button: React.FC<ButtonProps> = ({
   className = "",
   id,
   disabled,
+  loadingSpinner,
 }) => {
   return (
     <button
@@ -29,6 +31,7 @@ const Button: React.FC<ButtonProps> = ({
       disabled={disabled}
     >
       {children}
+      {loadingSpinner ? <div className={styles.spinner}></div> : null}
     </button>
   );
 };
