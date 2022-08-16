@@ -22,6 +22,10 @@ const MainPage: React.FC<MainPageProps> = () => {
   const { trendedCount, trendedIsFetching } = useAppSelector(
     (state) => state.filmList.trendedFilms
   );
+  const isSearchFetching = useAppSelector(
+    (state) => state.search.isSearchFetching
+  );
+  const searchFilmList = useAppSelector((state) => state.search.response);
   const dispatch = useAppDispatch();
   const trendedFilmList = useAppSelector(
     (state) => state.filmList.trendedFilms.trendedFilms
@@ -56,6 +60,12 @@ const MainPage: React.FC<MainPageProps> = () => {
   ): Film[] | void => {
     switch (activeTab) {
       case TabEnum.HOME:
+        if (searchFilmList !== [] && searchFilmList !== null) {
+          if (searchFilmList === []) {
+            return filmsList;
+          }
+          return searchFilmList;
+        }
         return filmsList;
       case TabEnum.TRENDS:
         return trendedFilmList;
@@ -79,7 +89,13 @@ const MainPage: React.FC<MainPageProps> = () => {
       ) : (
         <FilmCardList
           filmCards={getActiveTabFilms(activeTab, filmsList, trendedFilmList)}
-          onButtonClick={() => dispatch(actions.fetchTrendedNextPage())}
+          onButtonClick={() => {
+            if (activeTab === "Home") {
+              dispatch(actions.fetchNextPage());
+            } else {
+              dispatch(actions.fetchTrendedNextPage());
+            }
+          }}
           isLoadingSpinner={isFetching}
         ></FilmCardList>
       )}

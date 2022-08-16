@@ -6,6 +6,7 @@ import { TabEnum } from "../../types";
 import styles from "./FilmPage.module.css";
 import btnStyles from "../../components/Button/Button.module.css";
 import cardListStyles from "../../components/FilmCardList/FilmCardList.module.css";
+import templateStyles from "../../components/Templates/Template/Template.module.css";
 import { ReactComponent as ImdbIcon } from "../../assets/imdbIcon.svg";
 import { ReactComponent as Circles } from "../../assets/Bookmark.svg";
 import { ReactComponent as LeftArrow } from "../../assets/leftArrow.svg";
@@ -38,7 +39,7 @@ const FilmPage: React.FC<FilmPageProps> = () => {
     );
   }
   return (
-    <Template>
+    <Template className={templateStyles.filmPgaeTemplateContainer}>
       <Sidebar
         tabs={TABS_LIST}
         activeTab={activeTab}
@@ -66,7 +67,9 @@ const FilmPage: React.FC<FilmPageProps> = () => {
           <div className={styles.infoContent}>
             <ul className={styles.genresList}>
               {genresArr?.map((genre) => (
-                <li className={styles.genresItem}>{genre}</li>
+                <li key={genre} className={styles.genresItem}>
+                  {genre}
+                </li>
               ))}
             </ul>
             <h3 className={styles.title}>{film.title}</h3>

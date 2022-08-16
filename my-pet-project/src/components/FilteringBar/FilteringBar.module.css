@@ -10,7 +10,7 @@
     width: 100%;
     height: 100vh;
     animation: fade-in 0.5s ease-in;
-    z-index: 2;
+    z-index: 10;
 }
 
 .containerHidden {

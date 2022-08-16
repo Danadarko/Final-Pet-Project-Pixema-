@@ -5,18 +5,71 @@
     box-sizing: border-box;
 }
 
-.App {
+
+/*.App {
+    --lm-background-color-black: #242426;
+    --lm-main-bg-color: #000;
+    --lm-text-color-white: #fff;
+    --lm-bg-green: #00A340;
+    --lm-bg-yellow: #F3A608;
+    --lm-bg-orange: #F45D2D;
+    --lm-bg-input: #323537;
+    --lm-text-color-grey: #AFB2B6;
+    --lm-text-color-white-grey: #80858B;
+    --lm-bg-button: #7B61FF;
+    --lm-text-color-lilac: #7B61FF;
+    --lm-bg-button-hover: #a492ff;
+    --lm-bg-button-active: #6a4dff;
+    --main-bg-color: var(--lm-main-bg-color);
+    --bg-input: var(--lm-bg-input);
+    --text-color-white: var(--lm-text-color-white);
     --background-color-black: #242426;
-    --main-bg-color: #000;
     --text-color-white: #fff;
     --bg-green: #00A340;
     --bg-yellow: #F3A608;
     --bg-orange: #F45D2D;
-    --bg-input: #323537;
     --text-color-grey: #AFB2B6;
     --text-color-white-grey: #80858B;
     --bg-button: #7B61FF;
     --text-color-lilac: #7B61FF;
     --bg-button-hover: #a492ff;
     --bg-button-active: #6a4dff;
+    --dm-main-bg-color: #E5E5E5;
+    --dm-bg-input: #AFB2B6;
+    --dm-text-color-white: #242426;
+}*/
+
+.App {
+    --main-bg-color: var(--lm-main-bg-color);
+    --bg-input: var(--lm-bg-input);
+    --text-color-white: var(--lm-text-color-white);
+    --text-color-switcher: var(--text-color-lilac);
+    --background-color-black: #242426;
+    --text-color-white: #fff;
+    --bg-green: #00A340;
+    --bg-yellow: #F3A608;
+    --bg-orange: #F45D2D;
+    --text-color-grey: #AFB2B6;
+    --text-color-white-grey: #80858B;
+    --bg-button: #7B61FF;
+    --text-color-lilac: #7B61FF;
+    --bg-button-hover: #a492ff;
+    --bg-button-active: #6a4dff;
+    --dm-main-bg-color: #E5E5E5;
+    --dm-bg-input: #AFB2B6;
+    --dm-text-color-white: #242426;
+    --lm-main-bg-color: #000;
+    --lm-text-color-white: #fff;
+    --lm-bg-input: #323537;
+    --text-color-switcher: var(--text-color-lilac)
+}
+
+@media (prefers-color-scheme: dark) {
+    .App {
+        --main-bg-color: var(--dm-main-bg-color);
+        --bg-input: var(--dm-bg-input);
+        --text-color-white: var(--dm-text-color-white);
+        --background-color-black: var(--text-color-white-grey);
+        --text-color-switcher: var(--lm-main-bg-color);
+    }
 }

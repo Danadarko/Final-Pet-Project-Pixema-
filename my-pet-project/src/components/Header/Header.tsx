@@ -13,8 +13,8 @@ const Header: React.FC<HeaderProps> = ({ onChevronClick }) => {
   return (
     <header className={styles.header}>
       <LogoIcon className={styles.svg} />
-      <SearchBar />
-      <UserInfo onClick={onChevronClick} />
+      <SearchBar onClick={onChevronClick} />
+      <UserInfo />
     </header>
   );
 };

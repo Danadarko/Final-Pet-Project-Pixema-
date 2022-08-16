@@ -84,10 +84,14 @@
     border: none;
 }
 
-.btnFeatures {
+.btnShow:active {
     background-color: var(--bg-input);
+}
+
+.btnFeatures {
+    background-color: var(--background-color-black);
     padding: 19 0;
-    height: 56px;
+    height: 47px;
     margin-right: 1px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -97,9 +101,9 @@
 }
 
 .btnFeatures:last-child {
-    background-color: var(--bg-input);
+    background-color: var(--background-color-black);
     padding: 19 0;
-    height: 56px;
+    height: 47px;
     margin-right: 0px;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;

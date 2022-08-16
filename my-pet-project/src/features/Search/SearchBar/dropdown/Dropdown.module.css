@@ -10,7 +10,6 @@
 }
 
 .ul {
-    display: none;
     width: 100%;
     display: block;
     background-color: var(--primary-text-color);

@@ -7,7 +7,7 @@ export namespace FetchFilmsApi {
   }): Promise<Film[]> {
     try {
       const result = await fetch(
-        `https://imdb-api.com/API/AdvancedSearch/k_s3xnrjwu?title_type=feature&count=${params.count}`
+        `https://imdb-api.com/API/AdvancedSearch/k_sh5zhazdd3?title_type=feature&count=${params.count}`
       );
       const { results } = await result.json();
       if (!result.ok) {
@@ -26,7 +26,7 @@ export namespace FetchFilmsApi {
   }): Promise<Film[]> {
     try {
       const result = await fetch(
-        `https://imdb-api.com/API/AdvancedSearch/k_s3xnrjwu?title_type=feature&user_rating=9.0,10&count=${params.count}`
+        `https://imdb-api.com/API/AdvancedSearch/k_sh5zhaddz3?title_type=feature&user_rating=9.0,10&count=${params.count}`
       );
       const { results } = await result.json();
       if (!result.ok) {

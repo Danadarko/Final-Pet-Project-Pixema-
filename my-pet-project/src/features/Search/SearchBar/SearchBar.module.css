@@ -6,6 +6,7 @@
     margin-right: 41px;
     max-width: 1184px;
     width: 100%;
+    position: relative;
 }
 
 .input {
@@ -21,6 +22,19 @@
     background-color: var(--bg-input);
     margin-right: 41px;
     color: var(--text-color-white);
+}
+
+.svg {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.svg:hover path {
+    stroke: var(--text-color-lilac);
+    transition: .5s;
 }
 
 .dropdownContainer {

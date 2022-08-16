@@ -15,6 +15,7 @@ const Settings: React.FC<SettingsProps> = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [isLightMode, setIsLightMode] = useState(false);
   return (
     <form className={styles.settingsContainer}>
       <fieldset className={styles.section}>
@@ -46,7 +47,7 @@ const Settings: React.FC<SettingsProps> = () => {
             title="Password"
             placeholder="Your password"
             onChange={(e) => setPassword(e.target.value)}
-            value={name}
+            value={password}
             className={inputStyles.inputSettings}
           />
           <div>
@@ -55,7 +56,7 @@ const Settings: React.FC<SettingsProps> = () => {
               title="New password"
               placeholder="New password"
               onChange={(e) => setNewPassword(e.target.value)}
-              value={email}
+              value={newPassword}
               className={inputStyles.inputSettings}
             />
             <Input
@@ -63,7 +64,7 @@ const Settings: React.FC<SettingsProps> = () => {
               title="Confirm password"
               placeholder="Confirm password"
               onChange={(e) => setConfirmPassword(e.target.value)}
-              value={email}
+              value={confirmPassword}
               className={inputStyles.inputSettings}
             />
           </div>
@@ -73,11 +74,11 @@ const Settings: React.FC<SettingsProps> = () => {
         <legend className={styles.title}>Color mode</legend>
         <div className={styles.inputGroupLast}>
           <div className={styles.textGroup}>
-            <p>Dark</p>
-            <p>Use the dark theme</p>
+            <p>{isLightMode ? "Light" : "Dark"}</p>
+            <p>{isLightMode ? "Use the dark theme" : "Use the light theme"}</p>
           </div>
           <div className={styles.switcher}>
-            <ThemeSwitcher />
+            <ThemeSwitcher onClick={() => setIsLightMode(!isLightMode)} />
           </div>
         </div>
       </fieldset>

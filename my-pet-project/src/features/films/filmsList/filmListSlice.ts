@@ -8,26 +8,22 @@ const filmListSlice = createSlice({
       films: [],
       isFetching: false,
       count: 10,
-      isLastPage: false,
     },
     trendedFilms: {
       trendedFilms: [],
       trendedIsFetching: false,
       trendedCount: 10,
-      isLastPage: false,
     },
   } as {
     allFilmsList: {
       films: Film[];
       isFetching: boolean;
       count: number;
-      isLastPage: boolean;
     };
     trendedFilms: {
       trendedFilms: Film[];
       trendedIsFetching: boolean;
       trendedCount: number;
-      isLastPage: boolean;
     };
   },
   reducers: {

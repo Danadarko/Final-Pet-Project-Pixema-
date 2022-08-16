@@ -27,7 +27,9 @@ const FilmCard: React.FC<FilmCardProps> = ({
   id,
   genres,
 }) => {
-  const genresArray = genres.split(",");
+  const genresArr = (genres: string): string => (genres === null ? "" : genres);
+  const genresArray = genresArr(genres).split(",");
+
   console.log(imDbRating);
   return (
     <article className={styles.card}>
