@@ -1,10 +1,11 @@
-import { TabEnum } from "../../types";
+import { AppPages, TabEnum } from "../../types";
 import Tab from "../Tab/Tab";
 import { ReactComponent as HomeIcon } from "../../assets/homeIcon.svg";
 import { ReactComponent as TrendsIcon } from "../../assets/trendsIcon.svg";
 import { ReactComponent as FavoritesIcon } from "../../assets/favoritesIcon.svg";
 import { ReactComponent as SettingsIcon } from "../../assets/settingsIcon.svg";
 import styles from "../SideBar/SideBar.module.css";
+import { Link } from "react-router-dom";
 
 type TabListProps = {
   tabs: TabEnum[];
@@ -14,7 +15,7 @@ type TabListProps = {
 
 const TabList: React.FC<TabListProps> = ({ tabs, activeTab, onTabClick }) => {
   return (
-    <div className={styles.list}>
+    <Link to={AppPages.All_FILMS} className={styles.list}>
       {tabs.map((tab) => (
         <Tab
           key={tab}
@@ -33,7 +34,7 @@ const TabList: React.FC<TabListProps> = ({ tabs, activeTab, onTabClick }) => {
           {tab}
         </Tab>
       ))}
-    </div>
+    </Link>
   );
 };
 export default TabList;

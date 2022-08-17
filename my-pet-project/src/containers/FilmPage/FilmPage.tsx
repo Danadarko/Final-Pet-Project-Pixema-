@@ -39,7 +39,11 @@ const FilmPage: React.FC<FilmPageProps> = () => {
     );
   }
   return (
-    <Template className={templateStyles.filmPgaeTemplateContainer}>
+    <Template
+      className={templateStyles.filmPgaeTemplateContainer}
+      onRatingClick={() => {}}
+      onYearClick={() => {}}
+    >
       <Sidebar
         tabs={TABS_LIST}
         activeTab={activeTab}

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { SortFilmsEnum } from "../../../components/FilteringBar/types";
 import { Film } from "../../../types/film";
 
 const filmListSlice = createSlice({
@@ -8,6 +9,11 @@ const filmListSlice = createSlice({
       films: [],
       isFetching: false,
       count: 10,
+      yearFrom: "",
+      yearTo: "",
+      raitingFrom: "",
+      raitingTo: "",
+      country: "",
     },
     trendedFilms: {
       trendedFilms: [],
@@ -19,6 +25,11 @@ const filmListSlice = createSlice({
       films: Film[];
       isFetching: boolean;
       count: number;
+      yearFrom: string;
+      yearTo: string;
+      raitingFrom: string;
+      raitingTo: string;
+      country: string;
     };
     trendedFilms: {
       trendedFilms: Film[];
@@ -33,7 +44,20 @@ const filmListSlice = createSlice({
     fetchTrendedNextPage: (state) => {
       state.trendedFilms.trendedCount = state.trendedFilms.trendedCount + 10;
     },
-    getFilmsFetch: (state, action: { payload: { count: number } }) => {
+    getFilmsFetch: (
+      state,
+      action: {
+        payload: {
+          count: number;
+          text: SortFilmsEnum;
+          yearFrom: string;
+          yearTo: string;
+          raitingFrom: string;
+          raitingTo: string;
+          country: string;
+        };
+      }
+    ) => {
       state.allFilmsList.isFetching = true;
     },
     getTrendedFilmsFetch: (state, action: { payload: { count: number } }) => {

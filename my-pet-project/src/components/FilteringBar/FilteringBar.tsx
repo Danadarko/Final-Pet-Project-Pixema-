@@ -8,21 +8,60 @@ import Button from "../Button/Button";
 import Input from "../Inputs/Input/Input";
 import { ReactComponent as ChevronIcon } from "../../assets/chevron-interface.svg";
 import { ReactComponent as Line } from "../../assets/line.svg";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { countryList, SortFilmsEnum } from "./types";
+import { actions } from "../../features/films/filmsList/filmListSlice";
+import { Link } from "react-router-dom";
+import { AppPages } from "../../types";
+import Select from "../Select/Select";
 
 type FilteringBarProps = {
   clasName?: string;
   onCancelClick: () => void;
+  onRatingClick: () => void;
+  onYearClick: () => void;
 };
 
 const FilteringBar: React.FC<FilteringBarProps> = ({
   clasName,
   onCancelClick,
+  onRatingClick,
+  onYearClick,
 }) => {
   const [inputText, setInputText] = useState("");
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
+  const [yearFrom, setYearFrom] = useState("");
+  const [raitingFrom, setRaitingFrom] = useState("");
+  const [yearTo, setYearTo] = useState("");
+  const [raitingTo, setRaitingTo] = useState("");
+  const countryListArr = Object.values(countryList);
+  const [selectedOption, setSelectedOption] = useState("");
+  const dispatch = useAppDispatch();
+  const { count, isFetching } = useAppSelector(
+    (state) => state.filmList.allFilmsList
+  );
+  const [sortingBy, setSortingBy] = useState<SortFilmsEnum>(
+    SortFilmsEnum.Popularity
+  );
+
   return (
-    <div className={`${clasName} ${styles.container}`}>
+    <form
+      className={`${clasName} ${styles.container}`}
+      onSubmit={(e) => {
+        e.preventDefault();
+        dispatch(
+          actions.getFilmsFetch({
+            count: count,
+            text: sortingBy,
+            yearFrom: yearFrom,
+            yearTo: yearTo,
+            raitingFrom: raitingFrom,
+            raitingTo: raitingTo,
+            country: selectedOption,
+          })
+        );
+        console.log("gone");
+      }}
+    >
       <div className={styles.titleGroup}>
         <h2 className={styles.title}>Filters</h2>
         <CancelIcon onClick={onCancelClick} className={styles.svg} />
@@ -30,8 +69,22 @@ const FilteringBar: React.FC<FilteringBarProps> = ({
       <div className={styles.content}>
         <FilteringSection title="Sort by">
           <div className={styles.btnGroup}>
-            <Button className={btnStyles.filterBtn}>Rating</Button>
-            <Button className={btnStyles.filterBtn}>Year</Button>
+            <Button
+              className={btnStyles.filterBtn}
+              onClick={() => {
+                setSortingBy(SortFilmsEnum.Popularity);
+              }}
+            >
+              Rating
+            </Button>
+            <Button
+              className={btnStyles.filterBtn}
+              onClick={() => {
+                setSortingBy(SortFilmsEnum.Year);
+              }}
+            >
+              Year
+            </Button>
           </div>
         </FilteringSection>
         <Line className={styles.line}></Line>
@@ -41,6 +94,7 @@ const FilteringBar: React.FC<FilteringBarProps> = ({
           placeholder="Your text"
           onChange={(e) => setInputText(e.target.value)}
           value={inputText}
+          required={false}
         />
         <FilteringSection title="Genre">
           <textarea className={styles.textarea}></textarea>
@@ -51,16 +105,18 @@ const FilteringBar: React.FC<FilteringBarProps> = ({
             <Input
               type="text"
               placeholder="from"
-              onChange={(e) => setFrom(e.target.value)}
-              value={from}
+              onChange={(e) => setYearFrom(e.target.value)}
+              value={yearFrom}
               className={inputStyles.inputFilter}
+              required={false}
             />
             <Input
               type="text"
               placeholder="to"
-              onChange={(e) => setTo(e.target.value)}
-              value={to}
+              onChange={(e) => setYearTo(e.target.value)}
+              value={yearTo}
               className={inputStyles.inputFilter}
+              required={false}
             />
           </div>
         </FilteringSection>
@@ -69,23 +125,29 @@ const FilteringBar: React.FC<FilteringBarProps> = ({
             <Input
               type="text"
               placeholder="from"
-              onChange={(e) => setFrom(e.target.value)}
-              value={from}
+              onChange={(e) => setRaitingFrom(e.target.value)}
+              value={raitingFrom}
               className={inputStyles.inputFilter}
+              required={false}
             />
             <Input
               type="text"
               placeholder="to"
-              onChange={(e) => setTo(e.target.value)}
-              value={to}
+              onChange={(e) => setRaitingTo(e.target.value)}
+              value={raitingTo}
               className={inputStyles.inputFilter}
+              required={false}
             />
           </div>
         </FilteringSection>
         <FilteringSection title="Country">
-          <div className={styles.customSelect}>
-            <select name="Select a country" className={styles.select}></select>
-          </div>
+          <Select
+            countryList={countryList}
+            value={selectedOption}
+            onChange={(e) => {
+              setSelectedOption(e.currentTarget.value);
+            }}
+          />
         </FilteringSection>
       </div>
 
@@ -93,11 +155,12 @@ const FilteringBar: React.FC<FilteringBarProps> = ({
         <Button type="reset" className={btnStyles.btnSubmit}>
           Clear filter
         </Button>
+
         <Button type="submit" className={btnStyles.btnSubmit}>
           Show results
         </Button>
       </div>
-    </div>
+    </form>
   );
 };
 export default FilteringBar;

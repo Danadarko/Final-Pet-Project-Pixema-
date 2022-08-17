@@ -11,7 +11,7 @@ type DropdownProps = {
 export const Dropdown: React.FC<DropdownProps> = ({ onSelectedItem, list }) => {
   return (
     <ul className={styles.ul}>
-      {list.map((item) => (
+      {/* {list.map((item) => (
         <Link
           to={`${AppPages.All_FILMS}/${item.id}`}
           key={item.id}
@@ -22,7 +22,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ onSelectedItem, list }) => {
             {item.title}
           </li>
         </Link>
-      ))}
+      ))} */}
     </ul>
   );
 };

@@ -7,6 +7,7 @@ import { actions } from "../../features/films/filmsList/filmListSlice";
 import SideBar from "../../components/SideBar/SideBar";
 import { TabEnum } from "../../types";
 import Settings from "../../components/Settings/Settings";
+import { SortFilmsEnum } from "../../components/FilteringBar/types";
 
 type MainPageProps = {};
 
@@ -16,9 +17,15 @@ const MainPage: React.FC<MainPageProps> = () => {
     (state) => state.filmList.allFilmsList.films
   );
   const [activeTab, setActiveTab] = useState(TabEnum.HOME);
-  const { count, isFetching } = useAppSelector(
-    (state) => state.filmList.allFilmsList
-  );
+  const {
+    count,
+    isFetching,
+    yearFrom,
+    yearTo,
+    raitingFrom,
+    raitingTo,
+    country,
+  } = useAppSelector((state) => state.filmList.allFilmsList);
   const { trendedCount, trendedIsFetching } = useAppSelector(
     (state) => state.filmList.trendedFilms
   );
@@ -31,11 +38,20 @@ const MainPage: React.FC<MainPageProps> = () => {
     (state) => state.filmList.trendedFilms.trendedFilms
   );
 
+  const [sortingBy, setSortingBy] = useState<SortFilmsEnum>(
+    SortFilmsEnum.Popularity
+  );
   useEffect(() => {
     if (!isFetching) {
       dispatch(
         actions.getFilmsFetch({
           count: count,
+          text: sortingBy,
+          yearFrom: yearFrom,
+          yearTo: yearTo,
+          raitingFrom: raitingFrom,
+          raitingTo: raitingTo,
+          country: country,
         })
       );
     }
@@ -78,7 +94,14 @@ const MainPage: React.FC<MainPageProps> = () => {
   };
 
   return (
-    <Template>
+    <Template
+      onRatingClick={() => {
+        setSortingBy(SortFilmsEnum.Popularity);
+      }}
+      onYearClick={() => {
+        setSortingBy(SortFilmsEnum.Year);
+      }}
+    >
       <SideBar
         tabs={TABS_LIST}
         activeTab={activeTab}
