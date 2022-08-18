@@ -25,13 +25,19 @@ const MainPage: React.FC<MainPageProps> = () => {
     raitingFrom,
     raitingTo,
     country,
+    genres,
   } = useAppSelector((state) => state.filmList.allFilmsList);
-  const { trendedCount, trendedIsFetching } = useAppSelector(
-    (state) => state.filmList.trendedFilms
-  );
-  const isSearchFetching = useAppSelector(
-    (state) => state.search.isSearchFetching
-  );
+  const {
+    trendedCount,
+    trendedIsFetching,
+    trendedCountry,
+    trendedRaitingFrom,
+    trendedRaitingTo,
+    trendedYearFrom,
+    trendedYearTo,
+    trendedGenres,
+  } = useAppSelector((state) => state.filmList.trendedFilms);
+
   const searchFilmList = useAppSelector((state) => state.search.response);
   const dispatch = useAppDispatch();
   const trendedFilmList = useAppSelector(
@@ -41,6 +47,7 @@ const MainPage: React.FC<MainPageProps> = () => {
   const [sortingBy, setSortingBy] = useState<SortFilmsEnum>(
     SortFilmsEnum.Popularity
   );
+
   useEffect(() => {
     if (!isFetching) {
       dispatch(
@@ -52,6 +59,7 @@ const MainPage: React.FC<MainPageProps> = () => {
           raitingFrom: raitingFrom,
           raitingTo: raitingTo,
           country: country,
+          genres: genres,
         })
       );
     }
@@ -61,7 +69,14 @@ const MainPage: React.FC<MainPageProps> = () => {
     if (!trendedIsFetching) {
       dispatch(
         actions.getTrendedFilmsFetch({
-          count: trendedCount,
+          trendedCount: trendedCount,
+          text: sortingBy,
+          trendedYearFrom: trendedYearFrom,
+          trendedYearTo: trendedYearTo,
+          trendedRaitingFrom: trendedRaitingFrom,
+          trendedRaitingTo: trendedRaitingTo,
+          trendedCountry: trendedCountry,
+          trendedGenres: trendedGenres,
         })
       );
     }

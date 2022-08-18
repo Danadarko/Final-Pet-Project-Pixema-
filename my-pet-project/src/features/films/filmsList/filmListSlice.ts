@@ -14,11 +14,18 @@ const filmListSlice = createSlice({
       raitingFrom: "",
       raitingTo: "",
       country: "",
+      genres: [],
     },
     trendedFilms: {
       trendedFilms: [],
       trendedIsFetching: false,
       trendedCount: 10,
+      trendedYearFrom: "",
+      trendedYearTo: "",
+      trendedRaitingFrom: "9.0",
+      trendedRaitingTo: "10",
+      trendedCountry: "",
+      trendedGenres: [],
     },
   } as {
     allFilmsList: {
@@ -30,11 +37,18 @@ const filmListSlice = createSlice({
       raitingFrom: string;
       raitingTo: string;
       country: string;
+      genres: string[];
     };
     trendedFilms: {
       trendedFilms: Film[];
       trendedIsFetching: boolean;
       trendedCount: number;
+      trendedYearFrom: string;
+      trendedYearTo: string;
+      trendedRaitingFrom: string;
+      trendedRaitingTo: string;
+      trendedCountry: string;
+      trendedGenres: string[];
     };
   },
   reducers: {
@@ -55,12 +69,28 @@ const filmListSlice = createSlice({
           raitingFrom: string;
           raitingTo: string;
           country: string;
+          genres: string[];
         };
       }
     ) => {
       state.allFilmsList.isFetching = true;
+      state.allFilmsList.genres = action.payload.genres;
     },
-    getTrendedFilmsFetch: (state, action: { payload: { count: number } }) => {
+    getTrendedFilmsFetch: (
+      state,
+      action: {
+        payload: {
+          trendedCount: number;
+          text: SortFilmsEnum;
+          trendedYearFrom: string;
+          trendedYearTo: string;
+          trendedRaitingFrom: string;
+          trendedRaitingTo: string;
+          trendedCountry: string;
+          trendedGenres: string[];
+        };
+      }
+    ) => {
       state.trendedFilms.trendedIsFetching = true;
     },
     getFilmsSuccess: (
@@ -73,7 +103,7 @@ const filmListSlice = createSlice({
     },
     getTrendedFilmsSuccess: (
       state,
-      action: { payload: { films: Film[]; count: number } }
+      action: { payload: { films: Film[]; trendedCount: number } }
     ) => {
       //state.films = action.payload.films;
       state.trendedFilms.trendedFilms = [...action.payload.films];

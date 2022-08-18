@@ -6,14 +6,13 @@ import { ReactComponent as CancelIcon } from "../../assets/Icon-Cancel.svg";
 import FilteringSection from "./FilteringSection/FilteringSection";
 import Button from "../Button/Button";
 import Input from "../Inputs/Input/Input";
-import { ReactComponent as ChevronIcon } from "../../assets/chevron-interface.svg";
 import { ReactComponent as Line } from "../../assets/line.svg";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { countryList, SortFilmsEnum } from "./types";
 import { actions } from "../../features/films/filmsList/filmListSlice";
-import { Link } from "react-router-dom";
-import { AppPages } from "../../types";
+
 import Select from "../Select/Select";
+import InputGenres from "../Inputs/InputGenres/InputGenres";
 
 type FilteringBarProps = {
   clasName?: string;
@@ -25,27 +24,37 @@ type FilteringBarProps = {
 const FilteringBar: React.FC<FilteringBarProps> = ({
   clasName,
   onCancelClick,
-  onRatingClick,
-  onYearClick,
 }) => {
   const [inputText, setInputText] = useState("");
   const [yearFrom, setYearFrom] = useState("");
   const [raitingFrom, setRaitingFrom] = useState("");
   const [yearTo, setYearTo] = useState("");
   const [raitingTo, setRaitingTo] = useState("");
-  const countryListArr = Object.values(countryList);
+
   const [selectedOption, setSelectedOption] = useState("");
   const dispatch = useAppDispatch();
-  const { count, isFetching } = useAppSelector(
-    (state) => state.filmList.allFilmsList
-  );
+  const { count } = useAppSelector((state) => state.filmList.allFilmsList);
   const [sortingBy, setSortingBy] = useState<SortFilmsEnum>(
     SortFilmsEnum.Popularity
   );
+  const {
+    trendedCount,
+    trendedCountry,
+    trendedRaitingFrom,
+    trendedRaitingTo,
+    trendedYearFrom,
+    trendedYearTo,
+    trendedGenres,
+  } = useAppSelector((state) => state.filmList.trendedFilms);
+  const [inputValue, setInputValue] = useState("");
+  const [genres, setGenres] = useState<string[]>([]);
 
   return (
     <form
       className={`${clasName} ${styles.container}`}
+      onKeyPress={(e) => {
+        if (e.key === "Enter") e.preventDefault();
+      }}
       onSubmit={(e) => {
         e.preventDefault();
         dispatch(
@@ -57,9 +66,21 @@ const FilteringBar: React.FC<FilteringBarProps> = ({
             raitingFrom: raitingFrom,
             raitingTo: raitingTo,
             country: selectedOption,
+            genres: genres,
           })
         );
-        console.log("gone");
+        dispatch(
+          actions.getTrendedFilmsFetch({
+            trendedCount: trendedCount,
+            text: sortingBy,
+            trendedYearFrom: trendedYearFrom,
+            trendedYearTo: trendedYearTo,
+            trendedRaitingFrom: trendedRaitingFrom,
+            trendedRaitingTo: trendedRaitingTo,
+            trendedCountry: trendedCountry,
+            trendedGenres: trendedGenres,
+          })
+        );
       }}
     >
       <div className={styles.titleGroup}>
@@ -96,10 +117,27 @@ const FilteringBar: React.FC<FilteringBarProps> = ({
           value={inputText}
           required={false}
         />
-        <FilteringSection title="Genre">
-          <textarea className={styles.textarea}></textarea>
-        </FilteringSection>
 
+        <InputGenres
+          onDeleteClick={(e) => {
+            const currentDeleteElement = e.target;
+            const currentGenreObject = currentDeleteElement.parentElement;
+            const genreString = currentGenreObject.innerHTML.split("<");
+            setGenres((current) =>
+              [...current].filter((genre) => genre !== genreString[0])
+            );
+          }}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              console.log("Enter key is pressed");
+              setGenres((current) => [...current, inputValue]);
+              setInputValue("");
+            }
+          }}
+          genresListArray={genres}
+        />
         <FilteringSection title="Years">
           <div className={styles.inputGroup}>
             <Input
@@ -152,7 +190,19 @@ const FilteringBar: React.FC<FilteringBarProps> = ({
       </div>
 
       <div className={styles.btnSubmitGroup}>
-        <Button type="reset" className={btnStyles.btnSubmit}>
+        <Button
+          type="reset"
+          className={btnStyles.btnSubmit}
+          onClick={() => {
+            setInputText("");
+            setGenres([]);
+            setInputValue("");
+            setRaitingFrom("");
+            setRaitingTo("");
+            setYearTo("");
+            setSelectedOption("");
+          }}
+        >
           Clear filter
         </Button>
 

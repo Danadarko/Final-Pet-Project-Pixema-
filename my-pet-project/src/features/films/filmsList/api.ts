@@ -14,6 +14,7 @@ export namespace FetchFilmsApi {
     raitingFrom: string;
     raitingTo: string;
     country: string;
+    genres: string[];
   }): Promise<Film[]> {
     function getKeyByValue(
       object: { [char: string]: string },
@@ -22,7 +23,11 @@ export namespace FetchFilmsApi {
       const abbr = Object.keys(object).find((key) => object[key] === value);
       return abbr?.toString().toLocaleLowerCase();
     }
+
     const abbr = getKeyByValue(countryList, params.country);
+    const newGenres = [...params.genres].map((genre) =>
+      genre.toLocaleLowerCase()
+    );
     try {
       const userRating =
         params.raitingFrom || params.raitingTo ? "&user_rating=" : "";
@@ -34,9 +39,10 @@ export namespace FetchFilmsApi {
       const numbersMonthDayTo = params.yearTo ? "-01-01" : "";
       const countries = params.country ? "&countries=" : "";
       const countryAbbr = abbr ? abbr : "";
+      const genresText = params.genres ? "&genres=" : "";
 
       const result = await fetch(
-        `https://imdb-api.com/API/AdvancedSearch/k_3y037qo6?title_type=feature${userRating}${params.raitingFrom}${commaForRating}${params.raitingTo}${releaseDate}${params.yearFrom}${numbersMonthDayFrom}${commaForYear}${params.yearTo}${numbersMonthDayTo}${countries}${countryAbbr}&count=${params.count}&sort=${params.text},asc`
+        `https://imdb-api.com/API/AdvancedSearch/k_s3xnrjwu?title_type=feature${userRating}${params.raitingFrom}${commaForRating}${params.raitingTo}${releaseDate}${params.yearFrom}${numbersMonthDayFrom}${commaForYear}${params.yearTo}${numbersMonthDayTo}${genresText}${newGenres}${countries}${countryAbbr}&count=${params.count}&sort=${params.text},asc`
       );
       const { results } = await result.json();
       if (!result.ok) {
@@ -51,11 +57,45 @@ export namespace FetchFilmsApi {
   }
 
   export async function fetchTrendedFilms(params: {
-    count: number;
+    trendedCount: number;
+    text: SortFilmsEnum;
+    trendedYearFrom: string;
+    trendedYearTo: string;
+    trendedRaitingFrom: string;
+    trendedRaitingTo: string;
+    trendedCountry: string;
+    trendedGenres: string[];
   }): Promise<Film[]> {
+    function getKeyByValue(
+      object: { [char: string]: string },
+      value: string
+    ): string | undefined {
+      const abbr = Object.keys(object).find((key) => object[key] === value);
+      return abbr?.toString().toLocaleLowerCase();
+    }
+    const abbr = getKeyByValue(countryList, params.trendedCountry);
+    const newGenres = [...params.trendedGenres].map((genre) =>
+      genre.toLocaleLowerCase()
+    );
     try {
+      const userRating =
+        params.trendedRaitingFrom || params.trendedRaitingTo
+          ? "&user_rating="
+          : "";
+      const commaForRating =
+        params.trendedRaitingFrom && params.trendedRaitingTo ? "," : "";
+      const releaseDate =
+        params.trendedYearFrom || params.trendedYearTo ? "&release_date=" : "";
+      const commaForYear =
+        params.trendedYearFrom && params.trendedYearTo ? "," : "";
+      const numbersMonthDayFrom = params.trendedYearFrom ? "-01-01" : "";
+      const numbersMonthDayTo = params.trendedYearTo ? "-01-01" : "";
+      const countries = params.trendedCountry ? "&countries=" : "";
+      const countryAbbr = abbr ? abbr : "";
+      const genresText = params.trendedGenres ? "&genres=" : "";
+
       const result = await fetch(
-        `https://imdb-api.com/API/AdvancedSearch/k_2y9c7day?title_type=feature&user_rating=9.0,10&count=${params.count}`
+        `https://imdb-api.com/API/AdvancedSearch/k_2y9c7day?title_type=feature${userRating}${params.trendedRaitingFrom}${commaForRating}${params.trendedRaitingTo}${releaseDate}${params.trendedYearFrom}${numbersMonthDayFrom}${commaForYear}${params.trendedYearTo}${numbersMonthDayTo}${genresText}${newGenres}${countries}${countryAbbr}&count=${params.trendedCount}&sort=${params.text},asc`
       );
       const { results } = await result.json();
       if (!result.ok) {
